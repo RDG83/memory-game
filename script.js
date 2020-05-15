@@ -132,13 +132,12 @@ function resetGame() {
     while (grid.firstChild) {
         grid.removeChild(grid.lastChild);
     }
+    cardArray.sort(() => 0.5 - Math.random());
+
     startGame();
 }
 
-
 resetBtn.addEventListener('click', resetGame);
-
-
 
 startGame();
 
