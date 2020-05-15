@@ -3,6 +3,9 @@ score.textContent = 0;
 
 const grid = document.querySelector(".grid-container");
 const resetBtn = document.querySelector("#reset");
+const difficultySetter = document.querySelector("#difficulty");
+
+let difficulty = difficultySetter.value;
 
 let cardArray = [
     {
@@ -119,7 +122,7 @@ function flipcard() {
         chosenCardsId.push(cardId);
         this.setAttribute('src', cardArray[cardId].img);
         if (chosenCards.length === 2) {
-            setTimeout(checkMatch, 500);
+            setTimeout(checkMatch, difficulty);
         }
     }
 }
@@ -133,7 +136,7 @@ function resetGame() {
         grid.removeChild(grid.lastChild);
     }
     cardArray.sort(() => 0.5 - Math.random());
-
+    difficulty = difficultySetter.value;
     startGame();
 }
 
