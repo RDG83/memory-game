@@ -86,18 +86,16 @@ function checkMatch() {
     let optionTwo = chosenCardsId[1];
 
     if (chosenCards[0] === chosenCards[1]) {
-        cards[optionOne].setAttribute('src', 'images/white_tile.png')
-
-        cards[optionTwo].setAttribute('src', 'images/white_tile.png')
+        cards[optionOne].setAttribute('src', 'images/white_tile.png');
+        cards[optionTwo].setAttribute('src', 'images/white_tile.png');
         matches.push(chosenCards);
-        score.textContent++
+        score.textContent++;
         if (matches.length === cardArray.length / 2) {
             score.textContent = "You have guessed all and completed the game"
         }
     } else {
-        cards[optionOne].setAttribute('src', 'images/background.png')
-
-        cards[optionTwo].setAttribute('src', 'images/background.png')
+        cards[optionOne].setAttribute('src', 'images/background.png');
+        cards[optionTwo].setAttribute('src', 'images/background.png');
     }
     chosenCards = [];
     chosenCardsId = [];
@@ -116,7 +114,7 @@ function startGame() {
 function flipcard() {
     let cardId = this.getAttribute('data-id');
     if (chosenCardsId.length > 0 && cardId === chosenCardsId[0]) {
-        alert("already chosen, please choose another")
+        alert("already chosen, please choose another");
     } else {
         chosenCards.push(cardArray[cardId].name);
         chosenCardsId.push(cardId);
