@@ -1,7 +1,8 @@
-let score = document.getElementById("score");
-score.textContent = 6;
+const score = document.getElementById("score");
+score.textContent = 0;
 
 const grid = document.querySelector(".grid-container");
+const resetBtn = document.querySelector("#reset");
 
 let cardArray = [
     {
@@ -70,6 +71,8 @@ let cardArray = [
     }
 ];
 
+cardArray.sort(() => 0.5 - Math.random());
+
 let chosenCards = [];
 let chosenCardsId = [];
 let matches = [];
@@ -84,7 +87,7 @@ function checkMatch() {
 
         cards[optionTwo].setAttribute('src', 'images/white_tile.png')
         matches.push(chosenCards);
-        console.log("matches", matches)
+        score.textContent++
         if (matches.length === cardArray.length / 2) {
             score.textContent = "You have guessed all and completed the game"
         }
@@ -109,16 +112,33 @@ function startGame() {
 
 function flipcard() {
     let cardId = this.getAttribute('data-id');
-
-    chosenCards.push(cardArray[cardId].name);
-    chosenCardsId.push(cardId);
-    this.setAttribute('src', cardArray[cardId].img);
-    console.log(chosenCards);
-    console.log(chosenCardsId);
-    if (chosenCards.length === 2) {
-        setTimeout(checkMatch, 500);
+    if (chosenCardsId.length > 0 && cardId === chosenCardsId[0]) {
+        alert("already chosen, please choose another")
+    } else {
+        chosenCards.push(cardArray[cardId].name);
+        chosenCardsId.push(cardId);
+        this.setAttribute('src', cardArray[cardId].img);
+        if (chosenCards.length === 2) {
+            setTimeout(checkMatch, 500);
+        }
     }
 }
+
+function resetGame() {
+    score.textContent = 0;
+    chosenCards = [];
+    chosenCardsId = [];
+    matches = [];
+    while (grid.firstChild) {
+        grid.removeChild(grid.lastChild);
+    }
+    startGame();
+}
+
+
+resetBtn.addEventListener('click', resetGame);
+
+
 
 startGame();
 
